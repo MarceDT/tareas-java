@@ -1,0 +1,96 @@
+public class Alumno {
+    private final static int CURSOS = 5; // no de cursos de la carrera
+    private String nombre; // nombre del alumno
+    private int id; // identificador del alumno
+    private int anio_nacimiento; // año de nacimiento del alumno
+    private double notas[] = new double[CURSOS]; // notas medias de cada uno de los 5 años
+    private static int total_alumnos = 0; // número total de alumnos
+    
+    public Alumno(String nombre, int anio_nacimiento) {
+        this.nombre = nombre;
+        this.anio_nacimiento = anio_nacimiento;
+        this.id = ++total_alumnos;
+    }
+    
+    public void mostrar() {
+        System.out.println("Nombre: " + nombre);
+        System.out.println("ID: " + id);
+        System.out.print("Notas: ");
+        for (int i = 0; i < CURSOS; i++) {
+            System.out.print(notas[i] + " ");
+        }
+        System.out.println();
+    }
+    
+    public void setNota(int curso, double nota) {
+        if (curso >= 1 && curso <= CURSOS) {
+            notas[curso-1] = nota;
+        }
+    }
+    
+    public double getNota(int curso) {
+        if (curso >= 1 && curso <= CURSOS) {
+            return notas[curso-1];
+        }
+        return -1;
+    }
+}
+public class Ordenador {
+    private String marca;
+    private int velocidad;
+    private static int contador = 0;
+    
+    public Ordenador(String marca) {
+        this.marca = marca;
+        this.velocidad = 3000;
+        contador++;
+    }
+    
+    public Ordenador(String marca, int velocidad) {
+        this.marca = marca;
+        this.velocidad = velocidad;
+        contador++;
+    }
+    
+    public static int getContador() {
+        return contador;
+    }
+}
+public class Primitiva {
+    private final int maxValor = 49, minValor = 1;
+    private String dia;
+    private double recaudacion;
+    private int[] numeros = new int[7];
+    private int[] acertantes = new int[5];
+    
+    public Primitiva(String dia, double recaudacion, int[] numeros, int[] acertantes) {
+        this.dia = dia;
+        this.recaudacion = recaudacion;
+        if (compruebaNumeros(numeros)) {
+            this.numeros = numeros;
+            this.acertantes = acertantes;
+        } else {
+            System.out.println("Combinación no válida");
+        }
+    }
+    
+    public boolean compruebaNumeros(int[] numeros) {
+        if (numeros.length != 7) {
+            return false;
+        }
+        for (int i = 0; i < 7; i++) {
+            if (numeros[i] < minValor || numeros[i] > maxValor) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public void ponerResultados(double recaudacion, int[] numeros, int[] acertantes) {
+        if (compruebaNumeros(numeros)) {
+            this.recaudacion = recaudacion;
+            this.numeros = numeros;
+            this.acertantes = acertantes;
+        } else {
+            System.out.println("Combinación no válida");
+       
